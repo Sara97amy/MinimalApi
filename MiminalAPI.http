@@ -1,0 +1,41 @@
+﻿@MiminalAPI_HostAddress = https://localhost:7181
+
+POST {{MiminalAPI_HostAddress}}/todoitems
+Content-Type: application/json
+
+{
+  "name":"walk dog",
+  "isComplete":true
+}
+
+###
+
+GET {{MiminalAPI_HostAddress}}/todoitems
+
+###
+
+@id=1
+GET {{MiminalAPI_HostAddress}}/todoitems/{{id}}
+
+###
+
+PUT {{MiminalAPI_HostAddress}}/todoitems/{{id}}
+Content-Type: application/json
+
+{
+  "id": 1,
+  "name": "feed fish",
+  "isComplete": false
+}
+
+###
+
+PATCH {{MiminalAPI_HostAddress}}/todoitems/1
+Content-Type: application/json
+
+{
+
+  "name": "run errands"
+}
+
+###
