@@ -6,6 +6,16 @@ builder.Services.AddDbContext<ToDoDB>(opt => opt.UseInMemoryDatabase("TodoList")
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 var app = builder.Build();
 
+vvar miljo = builder.Configuration["APP_ENV"] ?? "okänd miljö";
+
+app.MapGet("/health", () => $"Hälsokontroll OK! Miljö: {miljo}");
+
+
+
+app.MapGet("/", () => "Välkommen till Todo API! Tillgängliga endpoints:\n GET /todoitems - Hämta alla todos\n GET /todoitems/complete - Hämta alla slutförda todos\n GET /todoitems/{id} - Hämta en todo\n POST /todoitems - Skapa en todo\n PUT /todoitems/{id} - Uppdatera en todo\n PATCH /todoitems/{id} - Delvis uppdatera en todo\n DELETE /todoitems/{id} - Ta bort en todo");
+
+
+
 app.MapGet("/todoitems", async (ToDoDB db) =>
     await db.ToDos.ToListAsync());
 
